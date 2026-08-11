@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meta de CPA por ingresso — Lançamento pago da Pati</title>
+<style>
+  :root{
+    --paper:#F5F2EC; --card:#FFFFFF; --ink:#191510; --muted:#6E665A; --line:#E5DFD3;
+    --accent:#186A6E; --accent-2:#12494C; --accent-soft:#E1EEED;
+    --good:#2E7D5B; --good-bg:#E4F0EA;
+    --warn:#B0791F; --warn-bg:#F6EBD5;
+    --bad:#B23A3A; --bad-bg:#F3DCDC;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --paper:#131108; --card:#201C13; --ink:#F2EDE1; --muted:#A79C89; --line:#332C1F;
+      --accent:#5FBEC0; --accent-2:#8AD3D4; --accent-soft:#152B2C;
+      --good:#6FC79B; --good-bg:#15271E;
+      --warn:#DCAF5E; --warn-bg:#2A2211;
+      --bad:#E08585; --bad-bg:#2C1616;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#131108; --card:#201C13; --ink:#F2EDE1; --muted:#A79C89; --line:#332C1F;
+    --accent:#5FBEC0; --accent-2:#8AD3D4; --accent-soft:#152B2C;
+    --good:#6FC79B; --good-bg:#15271E;
+    --warn:#DCAF5E; --warn-bg:#2A2211;
+    --bad:#E08585; --bad-bg:#2C1616;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0; background:var(--paper); color:var(--ink); font-family:var(--sans); font-size:17px; line-height:1.62; -webkit-font-smoothing:antialiased}
+  .wrap{max-width:730px; margin:0 auto; padding:0 24px 84px}
+  .num{font-family:var(--mono); font-variant-numeric:tabular-nums}
+
+  /* Hero */
+  header{padding:60px 0 30px; margin-bottom:8px; position:relative}
+  .brand{display:flex; align-items:center; gap:9px; font-size:12.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); font-weight:700; margin-bottom:26px}
+  .brand .dot{width:8px; height:8px; border-radius:50%; background:var(--accent)}
+  h1{font-size:clamp(30px,6vw,46px); line-height:1.08; margin:0 0 20px; letter-spacing:-.025em; text-wrap:balance; font-weight:800}
+  .lede{font-size:18.5px; color:var(--muted); margin:0; max-width:58ch}
+  .prices{display:flex; gap:14px; flex-wrap:wrap; margin:30px 0 0}
+  .price{flex:1 1 200px; background:var(--card); border:1px solid var(--line); border-radius:15px; padding:17px 20px; position:relative; overflow:hidden}
+  .price::before{content:""; position:absolute; left:0; top:0; bottom:0; width:4px; background:var(--accent)}
+  .price .lbl{font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); font-weight:700; margin:0 0 4px}
+  .price .val{font-family:var(--mono); font-size:30px; font-weight:700; margin:0; letter-spacing:-.01em}
+  .price .sub{font-size:13px; color:var(--muted); margin:2px 0 0}
+  .rule{height:2px; background:var(--ink); border:0; margin:0 0 4px}
+
+  section{margin-top:48px}
+  h2{font-size:13px; letter-spacing:.11em; text-transform:uppercase; color:var(--accent); font-weight:700; margin:0 0 6px; display:flex; align-items:center; gap:11px}
+  h2 .no{font-family:var(--mono); font-size:12px; color:var(--muted); border:1px solid var(--line); border-radius:6px; padding:2px 7px}
+  .h2sub{font-size:14.5px; color:var(--muted); margin:0 0 18px 0}
+  p{margin:0 0 16px}
+  strong{font-weight:700}
+  .accent{color:var(--accent); font-weight:700}
+
+  /* Formula card */
+  .formula{background:var(--accent-2); color:#fff; border-radius:16px; padding:26px 24px; text-align:center}
+  :root[data-theme="dark"] .formula, :root:not([data-theme="light"]) .formula{background:var(--card); border:1px solid var(--line)}
+  .formula .fl{font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; opacity:.7; margin:0 0 12px}
+  :root[data-theme="dark"] .formula .fl, :root:not([data-theme="light"]) .formula .fl{color:var(--accent)}
+  .formula .eq{font-family:var(--mono); font-size:clamp(14px,3.4vw,18px); font-weight:600; line-height:1.5; margin:0}
+  .formula .eq .hl{color:#8AD3D4; background:rgba(138,211,212,.14); border-radius:5px; padding:1px 5px}
+  :root[data-theme="dark"] .formula .eq, :root:not([data-theme="light"]) .formula .eq{color:var(--ink)}
+
+  /* Stat grid (SRI) */
+  .grid{display:grid; grid-template-columns:repeat(3,1fr); gap:11px}
+  @media (max-width:520px){.grid{grid-template-columns:repeat(2,1fr)}}
+  .cell{background:var(--card); border:1px solid var(--line); border-radius:13px; padding:15px 16px}
+  .cell.hero{grid-column:span 3; background:linear-gradient(135deg,var(--accent) 0%,var(--accent-2) 100%); border:0; color:#fff; display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap}
+  @media (max-width:520px){.cell.hero{grid-column:span 2}}
+  .cell .k{font-size:11.5px; letter-spacing:.05em; text-transform:uppercase; color:var(--muted); font-weight:700; margin:0 0 6px}
+  .cell .v{font-family:var(--mono); font-size:22px; font-weight:700; margin:0; line-height:1.05}
+  .cell .n{font-size:12px; color:var(--muted); margin:5px 0 0}
+  .cell.hero .k{color:rgba(255,255,255,.8)}
+  .cell.hero .v{font-size:34px; color:#fff}
+  .cell.hero .side{font-size:13px; color:rgba(255,255,255,.9); text-align:right; line-height:1.5}
+  .cell.hero .side b{font-size:15px}
+
+  .proof{display:flex; gap:12px; align-items:flex-start; background:var(--good-bg); border-radius:14px; padding:17px 20px; margin-top:14px; font-size:15px}
+  .proof .ic{color:var(--good); font-weight:800; flex:0 0 auto}
+  .proof b{color:var(--good)}
+
+  /* Compare */
+  .tbl-wrap{overflow-x:auto; border:1px solid var(--line); border-radius:13px}
+  table{border-collapse:collapse; width:100%; font-size:15.5px}
+  th,td{padding:12px 16px; text-align:left; border-bottom:1px solid var(--line); white-space:nowrap}
+  thead th{font-size:12px; letter-spacing:.05em; text-transform:uppercase; color:var(--muted); background:var(--card)}
+  tbody tr:last-child td{border-bottom:none}
+  td.num,th.num{text-align:right; font-family:var(--mono); font-variant-numeric:tabular-nums}
+  .col-opt{color:var(--muted)}
+  .col-real{color:var(--accent); font-weight:700}
+  tr.hi td{background:var(--accent-soft); font-weight:600}
+  tr.sri td{background:var(--warn-bg)}
+
+  /* Meta hero */
+  .meta{background:var(--ink); color:var(--paper); border-radius:20px; padding:34px 30px; text-align:center; position:relative; overflow:hidden}
+  :root[data-theme="dark"] .meta, :root:not([data-theme="light"]) .meta{background:var(--card); border:1px solid var(--line)}
+  .meta .lbl{font-size:13px; letter-spacing:.13em; text-transform:uppercase; margin:0 0 4px; opacity:.72}
+  .meta .big{font-family:var(--mono); font-size:clamp(52px,14vw,84px); font-weight:800; margin:0; letter-spacing:-.03em; line-height:1; color:#fff}
+  :root[data-theme="dark"] .meta .big, :root:not([data-theme="light"]) .meta .big{color:var(--accent-2)}
+  .meta .cap{font-size:15px; opacity:.75; margin:8px 0 0}
+  .meta .band2{display:flex; justify-content:center; gap:24px; flex-wrap:wrap; margin:22px 0 0; padding-top:20px; border-top:1px solid rgba(255,255,255,.14)}
+  :root[data-theme="dark"] .meta .band2, :root:not([data-theme="light"]) .meta .band2{border-top-color:var(--line)}
+  .meta .b2{font-size:13.5px; opacity:.9}
+  .meta .b2 b{font-family:var(--mono); display:block; font-size:19px; margin-top:3px; opacity:1}
+
+  .band-card{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:24px 24px 18px; margin-top:14px}
+  .band{display:flex; height:46px; border-radius:10px; overflow:hidden; box-shadow:inset 0 0 0 1px rgba(0,0,0,.04)}
+  .seg{display:flex; align-items:center; justify-content:center; font-size:12.5px; font-weight:700; text-align:center; padding:0 6px; line-height:1.15}
+  .seg.g{background:var(--good-bg); color:var(--good)}
+  .seg.w{background:var(--warn-bg); color:var(--warn)}
+  .seg.b{background:var(--bad-bg); color:var(--bad)}
+  .ticks{position:relative; height:28px; margin-top:5px}
+  .tick{position:absolute; transform:translateX(-50%); text-align:center; top:0}
+  .tick .bar{width:2px; height:9px; background:var(--muted); margin:0 auto 3px}
+  .tick .t{font-family:var(--mono); font-size:12px; color:var(--ink); font-weight:600}
+  .exp{position:relative; height:32px; margin-bottom:2px}
+  .exp .lab{position:absolute; transform:translateX(-50%); font-size:12.5px; font-weight:700; color:var(--accent); white-space:nowrap; top:0}
+  .exp .span{position:absolute; top:22px; height:9px; border:2px solid var(--accent); border-bottom:none; border-radius:6px 6px 0 0}
+
+  ul.clean{margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:13px}
+  ul.clean li{display:flex; gap:13px; align-items:flex-start}
+  ul.clean .mk{flex:0 0 auto; margin-top:1px; font-weight:700; color:#fff; background:var(--accent); width:24px; height:24px; border-radius:7px; display:flex; align-items:center; justify-content:center; font-size:13px; font-family:var(--mono)}
+  :root[data-theme="dark"] ul.clean .mk, :root:not([data-theme="light"]) ul.clean .mk{color:var(--ink)}
+
+  footer{margin-top:60px; padding-top:22px; border-top:1px solid var(--line); font-size:13px; color:var(--muted); display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand"><span class="dot"></span> Cardô Marketing · Análise de tráfego</div>
+    <hr class="rule">
+    <p class="lede" style="color:var(--accent);font-weight:700;margin:18px 0 12px;font-size:13px;letter-spacing:.12em;text-transform:uppercase">Lançamento pago · Pati</p>
+    <h1>Qual deve ser nossa meta de CPA por ingresso</h1>
+    <p class="lede">Puxei os números reais do último lançamento pago dela (SRI, maio) e usei como base. A meta abaixo sai da própria conta da Pati — realista, não otimista.</p>
+    <div class="prices">
+      <div class="price"><p class="lbl">Lote 1</p><p class="val">R$ 9,90</p><p class="sub">preço de entrada</p></div>
+      <div class="price"><p class="lbl">Lote 2</p><p class="val">R$ 19,90</p><p class="sub">virada de lote</p></div>
+    </div>
+  </header>
+
+  <section>
+    <h2><span class="no">01</span> A conta</h2>
+    <p class="h2sub">O CPA por ingresso sai desse funil. Cada peça é uma métrica da campanha:</p>
+    <div class="formula">
+      <p class="fl">Custo por venda</p>
+      <p class="eq">CPA = <span class="hl">CPM</span> ÷ ( 1000 × <span class="hl">CTR</span> × <span class="hl">Connect</span> × <span class="hl">Conversão</span> )</p>
+    </div>
+    <p style="margin-top:16px">O resultado depende inteiramente dos <strong>valores que a gente coloca</strong> — e é aí que mora a diferença entre uma estimativa otimista e uma realista.</p>
+  </section>
+
+  <section>
+    <h2><span class="no">02</span> A base real — lançamento SRI (maio)</h2>
+    <p class="h2sub">Período 29/04–04/05. Todos os números vêm da planilha do lançamento.</p>
+    <div class="grid">
+      <div class="cell hero">
+        <div><p class="k">CPA real (custo por venda)</p><p class="v">R$ 92,40</p></div>
+        <div class="side">R$ 5.543 investido · 60 vendas<br>Faturamento R$ 45.589 · <b>ROAS 8,2x</b></div>
+      </div>
+      <div class="cell"><p class="k">CPM</p><p class="v">R$ 30,58</p><p class="n">tráfego de venda</p></div>
+      <div class="cell"><p class="k">CTR</p><p class="v">1,07%</p><p class="n">campanha de venda</p></div>
+      <div class="cell"><p class="k">Connect</p><p class="v">76,2%</p><p class="n">clique → página</p></div>
+      <div class="cell"><p class="k">Conversão</p><p class="v">4,08%</p><p class="n">visita → venda</p></div>
+      <div class="cell"><p class="k">Ticket médio</p><p class="v">R$ 760</p><p class="n">produto do SRI</p></div>
+      <div class="cell"><p class="k">Custo por visita</p><p class="v">R$ 3,77</p><p class="n">real, na página</p></div>
+    </div>
+    <div class="proof"><span class="ic">✓</span><div>A fórmula reconstrói esse CPA em <b>R$ 92,40 cravado</b> — bate 100% com o real. É a prova de que o método está certo pra projetar o próximo lançamento.</div></div>
+  </section>
+
+  <section>
+    <h2><span class="no">03</span> Otimista vs. realista</h2>
+    <p class="h2sub">O erro comum é usar o tráfego do ebook (lead grátis, clique baratíssimo). O realista é o tráfego de venda — que é o SRI, dado real.</p>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Input da fórmula</th><th class="num">❌ Otimista (ebook)</th><th class="num">✅ Realista (SRI)</th></tr></thead>
+        <tbody>
+          <tr><td>CPM</td><td class="num col-opt">R$ 17,64</td><td class="num col-real">R$ 30,58</td></tr>
+          <tr><td>CTR</td><td class="num col-opt">4,39%</td><td class="num col-real">1,07%</td></tr>
+          <tr><td>Connect</td><td class="num col-opt">56,7%</td><td class="num col-real">76,2%</td></tr>
+          <tr><td>Conversão</td><td class="num col-opt">12–15%</td><td class="num col-real">8%</td></tr>
+          <tr class="hi"><td>CPA por ingresso</td><td class="num">~R$ 10</td><td class="num">~R$ 45</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:16px">O tráfego de <strong>venda</strong> dela é 4x menos clicado e quase 2x mais caro que o do ebook. Ignorar isso é o que gera uma meta bonita que a campanha nunca alcança.</p>
+  </section>
+
+  <section>
+    <h2><span class="no">04</span> Cenários de conversão</h2>
+    <p class="h2sub">Mantendo o tráfego real dela (custo por visita R$ 3,77), o que resta definir é a conversão do ingresso barato — que converte mais que os 4% do SRI, por ser de impulso.</p>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Conversão visita → venda</th><th class="num">CPA por ingresso</th></tr></thead>
+        <tbody>
+          <tr class="sri"><td>4% &nbsp;·&nbsp; nível do SRI (ticket alto)</td><td class="num">R$ 94</td></tr>
+          <tr><td>6% &nbsp;·&nbsp; pessimista</td><td class="num">R$ 63</td></tr>
+          <tr class="hi"><td>8% &nbsp;·&nbsp; realista</td><td class="num">R$ 47</td></tr>
+          <tr class="hi"><td>10% &nbsp;·&nbsp; realista</td><td class="num">R$ 38</td></tr>
+          <tr><td>15% &nbsp;·&nbsp; otimista</td><td class="num">R$ 25</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="no">05</span> A meta</h2>
+    <div class="meta">
+      <p class="lbl">Meta de CPA por ingresso · realista</p>
+      <p class="big">R$ 45</p>
+      <p class="cap">com <strong>R$ 35</strong> como marca a perseguir conforme a campanha otimiza</p>
+      <div class="band2">
+        <div class="b2">Stretch<b>R$ 35</b></div>
+        <div class="b2">Meta realista<b>R$ 45</b></div>
+        <div class="b2">Sinal de alerta<b>&gt; R$ 60</b></div>
+      </div>
+    </div>
+    <div class="band-card">
+      <div class="exp">
+        <span class="lab" style="left:60.7%">onde deve cair · R$ 38–47</span>
+        <span class="span" style="left:54.3%; width:12.9%"></span>
+      </div>
+      <div class="band" role="img" aria-label="Faixa de CPA: dentro da meta até R$45, atenção de R$45 a R$60, fora acima de R$60">
+        <div class="seg g" style="width:64.3%">Dentro da meta</div>
+        <div class="seg w" style="width:21.4%">Atenção</div>
+        <div class="seg b" style="width:14.3%">Fora</div>
+      </div>
+      <div class="ticks">
+        <div class="tick" style="left:0%"><span class="bar"></span><span class="t">R$ 0</span></div>
+        <div class="tick" style="left:50%"><span class="bar"></span><span class="t">R$ 35</span></div>
+        <div class="tick" style="left:64.3%"><span class="bar"></span><span class="t">R$ 45</span></div>
+        <div class="tick" style="left:85.7%"><span class="bar"></span><span class="t">R$ 60</span></div>
+        <div class="tick" style="left:100%"><span class="bar"></span><span class="t">R$ 70</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="no">06</span> Pontos de atenção</h2>
+    <ul class="clean">
+      <li><span class="mk">1</span><div>A única peça estimada é a <strong>conversão do ingresso barato</strong> (8–10%). Todo o resto — CPM, CTR, connect, custo por visita — é <strong>dado real</strong> do lançamento SRI.</div></li>
+      <li><span class="mk">2</span><div>A meta é <strong>R$ 45</strong> (conservadora) e não os R$ 25 do cenário otimista: é o primeiro lançamento no novo formato e o criativo ainda não tem histórico pra otimizar.</div></li>
+      <li><span class="mk">3</span><div>Plano: subir, medir <strong>1 semana</strong> de venda real e travar a meta definitiva com a conversão que a página do ingresso realmente entregar.</div></li>
+    </ul>
+  </section>
+
+  <footer>
+    <span>Cardô Marketing · Análise de tráfego</span>
+    <span>Base: lançamento SRI (mai/26) · dados reais da conta</span>
+  </footer>
+</div>
+</body>
+</html>
