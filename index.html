@@ -122,6 +122,19 @@
   ul.clean li{display:flex; gap:14px; align-items:flex-start}
   ul.clean .mk{flex:0 0 auto; margin-top:1px; font-family:var(--mono); font-weight:700; color:#fff; background:var(--plum); width:26px; height:26px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:.8rem}
 
+  /* Fase 0 — timeline de custo de mídia */
+  .phases{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:4px}
+  @media (max-width:560px){.phases{grid-template-columns:1fr}}
+  .phase{border-radius:14px; padding:16px 16px 18px; border:1px solid var(--line-2); background:var(--paper-2)}
+  .phase .mo{font-family:var(--mono); font-size:.64rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin:0 0 6px}
+  .phase .ph{font-family:var(--disp); font-weight:800; font-size:1.1rem; margin:0 0 9px; letter-spacing:-.01em}
+  .phase .cpm{display:inline-block; font-family:var(--mono); font-size:.62rem; font-weight:700; letter-spacing:.03em; padding:3px 9px; border-radius:20px}
+  .phase .dt{font-size:.8rem; color:var(--muted); margin:10px 0 0; line-height:1.45}
+  .phase.p-set{border-color:#B9DEC9; background:linear-gradient(160deg,var(--good-bg),var(--paper-2) 62%)}
+  .phase.p-set .cpm{background:#fff; color:var(--good)}
+  .phase.p-out .cpm{background:var(--warn-bg); color:var(--gold)}
+  .phase.p-nov .cpm{background:var(--bad-bg); color:var(--bad)}
+
   footer{margin-top:64px; padding-top:24px; border-top:1px solid var(--line-2); font-family:var(--mono); font-size:.72rem; letter-spacing:.04em; color:var(--muted); display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px}
 </style>
 </head>
@@ -235,7 +248,45 @@
   </section>
 
   <section>
-    <div class="shead"><span class="rn">06 — Ressalvas</span><h2>Pontos de atenção</h2></div>
+    <div class="shead"><span class="rn">06 — Fase 0 · antes de vender</span><h2>A campanha de reconhecimento</h2>
+      <p>Antes de captar e vender, a gente <strong>aquece</strong>. Ela roda em <span class="accent">setembro</span> — e o timing é o pulo do gato.</p></div>
+    <div class="phases">
+      <div class="phase p-set">
+        <p class="mo">Setembro</p>
+        <p class="ph">Reconhecimento</p>
+        <span class="cpm">CPM barato ↓</span>
+        <p class="dt">A mídia mais barata da janela inteira. Constrói o público quente.</p>
+      </div>
+      <div class="phase p-out">
+        <p class="mo">Outubro</p>
+        <p class="ph">Captação</p>
+        <span class="cpm">CPM caro · eleição</span>
+        <p class="dt">Leads a partir de 26/10, já sobre público aquecido → CPL menor.</p>
+      </div>
+      <div class="phase p-nov">
+        <p class="mo">Novembro</p>
+        <p class="ph">Evento + venda</p>
+        <span class="cpm">CPM caríssimo · BF</span>
+        <p class="dt">Evento 21–22/11, carrinho no domingo 22 e Black Friday 27.</p>
+      </div>
+    </div>
+    <p style="margin-top:16px">A lógica é uma só: <strong>construir audiência quando a mídia está barata (setembro) pra colher quando ela está cara (outubro/novembro)</strong>. Cada real gasto agora rende muito mais alcance do que renderá no meio da eleição ou da Black Friday.</p>
+    <p style="margin-top:16px"><strong>Reconhecimento não vende.</strong> O objetivo de mídia é alcance/vídeo (CPM baixo) e o entregável são os <span class="accent">públicos de retargeting</span> — quem viu os vídeos, engajou e visitou o perfil. É o combustível barato que a captação e a venda vão queimar depois. Três ângulos de conteúdo:</p>
+    <ul class="clean" style="margin-top:8px">
+      <li><span class="mk">1</span><div><strong>Autoridade da expert</strong> — quem é, por que confiar, o resultado que ela gera.</div></li>
+      <li><span class="mk">2</span><div><strong>Prova social</strong> — a transformação de alunos do último workshop (o sonho da carreira internacional).</div></li>
+      <li><span class="mk">3</span><div><strong>Dor &amp; desejo do público</strong> — conteúdo de identificação, que gera salvamento e compartilhamento.</div></li>
+    </ul>
+    <div class="grid" style="margin-top:22px">
+      <div class="cell"><p class="k">Objetivo</p><p class="v" style="font-size:1.12rem">Alcance + público</p><p class="n">não é CPL nem venda</p></div>
+      <div class="cell"><p class="k">Métricas</p><p class="v" style="font-size:1.12rem">CPM · Alcance</p><p class="n">frequência 1,5–2</p></div>
+      <div class="cell"><p class="k">Entregável</p><p class="v" style="font-size:1.12rem">Público quente</p><p class="n">p/ retarg. do lançamento</p></div>
+    </div>
+    <div class="proof" style="background:var(--plum-wash); margin-top:20px"><span class="ic" style="color:var(--plum)">→</span><div><b style="color:var(--plum)">Verba de setembro:</b> é a mais barata do lançamento inteiro. Proposta a validar na reunião — enxuta e constante (topo não precisa de muito), medida por <b style="color:var(--plum)">alcance e tamanho de público construído</b>, não por venda. Não soma "por cima" do orçamento: é a Fase 0 que <b style="color:var(--plum)">derruba o CAC</b> das fases seguintes.</div></div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="rn">07 — Ressalvas</span><h2>Pontos de atenção</h2></div>
     <ul class="clean">
       <li><span class="mk">1</span><div>A única peça estimada é a <strong>conversão do ingresso barato</strong> (8–10%). Todo o resto — CPM, CTR, connect, custo por visita — é <strong>dado real</strong> do lançamento SRI.</div></li>
       <li><span class="mk">2</span><div>A meta é <strong>R$ 45</strong> (conservadora) e não os R$ 25 do cenário otimista: é o primeiro lançamento no novo formato e o criativo ainda não tem histórico pra otimizar.</div></li>
